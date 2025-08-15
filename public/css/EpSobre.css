@@ -1,0 +1,137 @@
+/* Cabeçalho */
+.header-custom {
+    background-color: white;
+    padding: 15px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+/* Logo */
+.logo a {
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+}
+.logo .green {
+    color: #00B88A;
+}
+.logo .blue {
+    color: #006BE6;
+}
+
+/* Navegação */
+.nav-custom ul {
+    display: flex;
+    gap: 50px;  /* Ajuste o espaçamento entre 'Sobre' e 'Contato' */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Botões de navegação */
+.nav-custom ul li {
+    display: inline-block;
+    position: relative;
+}
+
+.nav-custom ul li a {
+    text-decoration: none;
+    padding: 12px 20px;
+    color: #fff;
+    border-radius: 25px;
+    background: linear-gradient(to right, #006BE6, #008CFF);
+    transition: all 0.3s ease;
+}
+.nav-custom ul li a:hover {
+    background: linear-gradient(to right, #008CFF, #006BE6);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Botões */
+.btn-custom, .btn-editar {
+    background: #007CE0;
+    color: #fff;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 25px;
+    text-decoration: none;
+    border: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+.btn-editar:hover, .btn-custom:hover {
+    background: #005bb5;
+}
+
+/* Container de edição (Agora um único contêiner flutuante) */
+.editar-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    max-width: 90%;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.editar-container.mostrar {
+    display: block;
+    opacity: 1;
+}
+
+/* Caixa de edição */
+.editar-box {
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Botões no formulário */
+.btn-fechar {
+    background-color: transparent;
+    color: #333;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.btn-fechar:hover {
+    color: #f44336;
+}
+
+/* Botão de Salvar Alterações */
+.btn-salvar {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.btn-salvar:hover {
+    background-color: #218838;
+}
+
+/* Estilo adicional para melhorar visualização */
+.form-group label {
+    font-weight: bold;
+}
+.form-group input, .form-group textarea {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    width: 100%;
+    margin-top: 5px;
+}

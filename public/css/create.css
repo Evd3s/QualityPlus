@@ -1,0 +1,135 @@
+/* Logo */
+.logo a {
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.logo .green {
+    color: #00B88A;
+}
+
+.logo .blue {
+    color: #006BE6;
+}
+
+/* Navegação */
+.nav-custom ul {
+    gap: 20px;
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+    display: flex;
+}
+
+.nav-custom a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #fff;
+    padding: 8px 12px;
+    transition: 0.3s;
+    background: linear-gradient(to right, #006BE6, #007CE0);
+    border-radius: 25px;
+}
+
+.nav-custom a:hover {
+    background: linear-gradient(to right, #007CE0, #006BE6);
+}
+
+/* Container */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Formulário da Empresa */
+.empresa-container {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.empresa-logo {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-right: 20px;
+}
+
+.empresa-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.empresa-info {
+    flex: 1;
+}
+
+.empresa-info h2 {
+    margin: 0;
+    font-size: 22px;
+    color: #333;
+}
+
+/* Estilos do formulário */
+.empresa-form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.empresa-form label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.empresa-form input,
+.empresa-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.empresa-form button {
+    background: #00B88A;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.empresa-form button:hover {
+    background: #009874;
+}
+
+.header-profile-image {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.profile-logo {
+    cursor: pointer;
+    transition: opacity 0.2s ease-in-out;
+    height: 40px; /* Ajuste conforme o tamanho da logo */
+}
+
+.profile-logo:hover {
+    opacity: 0.8;
+}
