@@ -10,7 +10,7 @@
 
 - **Laravel** - Framework PHP robusto e eficiente
 - **MySQL** - Banco de dados relacional
-- ~~Google Maps API - Para exibir e localizar lojas próximas~~
+- **Google Maps API** - Para exibir e localizar lojas próximas
 
 ---
 
@@ -89,4 +89,4 @@ Caso tenha alguma dúvida ou sugestão, entre em contato pelo GitHub!
 
 ---
 
-Feito por [Eudes Pontes, Victor Lemos, Lucas Luiz]
+Feito por [Eudes Pontes, Lucas Luiz]
