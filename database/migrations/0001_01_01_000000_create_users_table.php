@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('role')->default('cliente'); // Adicionando coluna de papel com valor padrão
+            $table->string('role')->default('cliente'); 
             $table->string('bio')->nullable();
             $table->rememberToken();
             $table->timestamps();
@@ -40,9 +40,7 @@ return new class extends Migration
         });        
     }
 
-    /**
-     * Reverse the migrations.
-     */
+    
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {

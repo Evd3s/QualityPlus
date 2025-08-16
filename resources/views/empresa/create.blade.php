@@ -5,7 +5,7 @@
 @section('content')
 <div class="container dashboard-container">
 
-    <!-- Cabeçalho -->
+    
     <header class="header-custom d-flex justify-content-between align-items-center mb-4">
         <a href="{{ route('dashboard') }}">
             <img src="{{ asset('images/Qualityplus.png') }}" alt="QualityPlus Logo" class="profile-logo">
@@ -27,10 +27,10 @@
         </div>
     </header>
 
-    <!-- Container principal -->
+    
     <div class="empresa-wrapper d-flex flex-column flex-lg-row gap-4">
 
-        <!-- Preview da empresa -->
+        
         <div class="empresa-preview card p-4 flex-fill">
             <div class="logo-container">
                 <img 
@@ -44,7 +44,7 @@
             <p id="empresa-detalhes" class="text-muted">Detalhes sobre a empresa...</p>
         </div>
 
-        <!-- Formulário -->
+        
         <div class="empresa-form card p-4 flex-fill">
             <h4 class="mb-3 fw-bold text-primary">Cadastro de Empresa</h4>
 
@@ -110,7 +110,7 @@
         }
     }
 
-    // Atualiza nome e descrição em tempo real
+    
     document.getElementById('nome').addEventListener('input', function() {
         document.getElementById('empresa-nome').textContent = this.value || 'Nome da Empresa';
     });
@@ -119,7 +119,7 @@
         document.getElementById('empresa-detalhes').textContent = this.value || 'Detalhes sobre a empresa...';
     });
 
-    // Inicializa placeholder para logo
+    
     document.getElementById('preview-img').parentElement.classList.add('no-logo');
 </script>
 @endsection

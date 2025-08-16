@@ -62,7 +62,7 @@
             <button id="cadastrar-produto-btn" class="btn-editar" style="margin-left: 15px;">Cadastrar Produto</button>
         </div>
 
-        <!-- Modal editar empresa -->
+        
         <div id="editar-container" class="modal" style="display: none;">
             <div class="modal-content">
                 <span id="fechar-btn" class="fechar">&times;</span>
@@ -99,7 +99,7 @@
             </div>
         </div>
 
-        <!-- Modal cadastrar produto -->
+        
         <div id="cadastrar-produto-container" class="modal" style="display: none;">
             <div class="modal-content">
                 <span id="fechar-cadastrar-produto-btn" class="fechar">&times;</span>
@@ -170,7 +170,7 @@
                         <div class="d-flex justify-content-center gap-2">
                             <a href="{{ route('produto.show', $produto->id) }}" class="btn-custom" style="background-color: #3490dc; color: white; padding: 6px 12px; border-radius: 8px; text-decoration: none; font-weight: 500;">Ver</a>
 
-                            <!-- Botão editar produto abre modal -->
+                            
                             <button class="btn-custom btn-editar-produto" 
                                     style="background-color: #ffc107; color: black; padding: 6px 12px; border-radius: 8px; font-weight: 500; border: none;"
                                     data-produto-id="{{ $produto->id }}">
@@ -185,7 +185,7 @@
                         </div>
                     </div>
 
-                    <!-- Modal editar produto (único para cada produto) -->
+                    
                     <div class="modal editar-produto-modal" id="editar-produto-modal-{{ $produto->id }}" style="display: none;">
                         <div class="modal-content">
                             <span class="fechar editar-produto-fechar" data-produto-id="{{ $produto->id }}">&times;</span>
@@ -245,7 +245,7 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        // Modal editar empresa
+        
         const editarBtn = document.getElementById('editar-btn');
         const editarContainer = document.getElementById('editar-container');
         const fecharBtn = document.getElementById('fechar-btn');
@@ -260,7 +260,7 @@
             });
         }
 
-        // Modal cadastrar produto
+        
         const cadastrarProdutoBtn = document.getElementById('cadastrar-produto-btn');
         const cadastrarProdutoContainer = document.getElementById('cadastrar-produto-container');
         const fecharCadastrarProdutoBtn = document.getElementById('fechar-cadastrar-produto-btn');
@@ -275,7 +275,7 @@
             });
         }
 
-        // Modais editar produto (para vários produtos)
+        
         const btnsEditarProduto = document.querySelectorAll('.btn-editar-produto');
         btnsEditarProduto.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -294,7 +294,7 @@
             });
         });
 
-        // Fechar modal clicando fora do conteúdo
+        
         window.addEventListener('click', (e) => {
             document.querySelectorAll('.editar-produto-modal, #editar-container, #cadastrar-produto-container').forEach(modal => {
                 if (e.target === modal) {
@@ -306,7 +306,7 @@
 </script>
 
 <style>
-    /* Modal geral padrão */
+    
     .modal {
         position: fixed;
         z-index: 1500;

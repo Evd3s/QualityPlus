@@ -32,7 +32,7 @@
         </div>
     </div>
 
-    <!-- Filtros de categorias -->
+    
     <section class="categories">
         <h3 class="section-title">Categorias</h3>
         <div class="items filtro-categorias">
@@ -54,7 +54,7 @@
         </div>
     </section>
 
-    <!-- Produtos filtrados por categoria -->
+    
     @if($categoria)
         @if($produtosFiltrados->count())
         <section class="categories">
@@ -75,7 +75,7 @@
         @endif
     @endif
 
-    <!-- Listagem de empresas -->
+    
     <section class="categories">
         <h3 class="section-title">Perto de você!</h3>
         <div class="items">

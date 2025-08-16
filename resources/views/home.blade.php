@@ -6,7 +6,7 @@
     <title>QualityPlus</title>
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     <style>
-        /* Cabeçalho personalizado para a Home */
+        
         header {
             display: flex;
             justify-content: space-between;
@@ -35,7 +35,7 @@
         header nav ul li {
             margin-right: 15px;
         }
-        /* Estilização dos links do cabeçalho com gradiente */
+        
         header nav ul li a {
             text-decoration: none;
             color: #fff;
@@ -54,7 +54,7 @@
 </head>
 <body>
 
-    <!-- Cabeçalho -->
+    
     <header>
         <div class="logo">
             <a href="{{ auth()->check() ? route('dashboard') : route('home') }}">
@@ -63,13 +63,13 @@
         </div>
         <nav>
             <ul>
-                <!-- Removido o "Home" -->
+                
                 <li><a href="{{ route('login') }}" class="btn-header">Entrar</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Seção Principal -->
+    
     <section class="hero">
         <div class="content-box">
             <h2>Cresça seu negócio com <strong>QualityPlus</strong></h2>
@@ -84,7 +84,7 @@
         </div>
     </section>
 
-    <!-- Rodapé personalizado -->
+    
     <footer style="background: linear-gradient(to right, #006BE6, #0052cc); color: #fff; padding: 20px; text-align: center;">
         <p>&copy; {{ date('Y') }} QualityPlus. Todos os direitos reservados.</p>
     </footer>

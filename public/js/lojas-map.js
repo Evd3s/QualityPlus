@@ -1,149 +1,389 @@
-// Updated lojas-map.js file
-let map;
-let currentPosition;
-let dragging = false;
-let startX = 0;
-let startY = 0;
-let translateX = 0;
-let translateY = 0;
-let storeMarkers = [
-    { id: 1, name: "Americanas Express", rating: 4.2, image: '/images/americanas.png' },
-    { id: 2, name: "Mix Mateus", rating: 4.5, image: '/images/mix-mateus.jpg' },
-    { id: 3, name: "Atacadão", rating: 4.7, image: '/images/store-placeholder.png' },
-    { id: 4, name: "Assaí", rating: 4.0, image: '/images/store-placeholder.png' },
-    { id: 5, name: "Carrefour", rating: 4.3, image: '/images/store-placeholder.png' },
-];
-
-// Initialize the map
-function initMap() {
-    // Set up the map container
-    const mapContainer = document.getElementById('map');
-    
-    // Create fake map
-    const mapImg = document.createElement('img');
-    mapImg.src = '/images/map-recife.jpg'; // The image you provided
-    mapImg.id = 'map-image';
-    mapImg.style.width = 'auto'; // Don't constrain width
-    mapImg.style.height = 'auto'; // Don't constrain height
-    mapImg.style.cursor = 'grab';
-    mapImg.style.position = 'absolute';
-    mapImg.style.transformOrigin = '0 0';
-    mapImg.style.transform = 'translate(0px, 0px)';
-    mapContainer.appendChild(mapImg);
-    
-    // Add drag functionality
-    mapImg.addEventListener('mousedown', (e) => {
-        if (e.button === 0) { // Left click
-            dragging = true;
-            startX = e.clientX;
-            startY = e.clientY;
-            mapImg.style.cursor = 'grabbing';
-            e.preventDefault(); // Prevent default selection behavior
-        }
-    });
-    
-    window.addEventListener('mousemove', (e) => {
-        if (!dragging) return;
-        
-        const dx = e.clientX - startX;
-        const dy = e.clientY - startY;
-        
-        // Update the translation
-        translateX += dx;
-        translateY += dy;
-        
-        // Apply the new translation
-        mapImg.style.transform = `translate(${translateX}px, ${translateY}px)`;
-        
-        // Update starting position for next move
-        startX = e.clientX;
-        startY = e.clientY;
-        
-        e.preventDefault();
-    });
-    
-    window.addEventListener('mouseup', () => {
-        if (dragging) {
-            dragging = false;
-            mapImg.style.cursor = 'grab';
-        }
-    });
-    
-    // Handle right-click to add user location
-    mapContainer.addEventListener('contextmenu', (e) => {
-        e.preventDefault();
-        
-        // Get click position relative to map container
-        const rect = mapContainer.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        // Add user location marker
-        addUserLocationMarker(x, y, mapContainer);
-        
-        // Show nearby stores
-        showNearbyStores();
-    });
-    
-    // Setup search input
-    const searchInput = document.getElementById("search-input");
-    searchInput.addEventListener("keypress", function(event) {
-        if (event.key === "Enter") {
-            showNearbyStores();
-        }
-    });
-}
-
-// Add user location marker
-function addUserLocationMarker(x, y, mapContainer) {
-    // Remove existing user marker if any
-    const existingMarker = document.querySelector('.user-marker');
-    if (existingMarker) {
-        existingMarker.remove();
+class LojasMap {
+    constructor() {
+        this.map = null;
+        this.currentMarker = null;
+        this.establishmentMarkers = [];
+        this.init();
     }
     
-    const userMarker = document.createElement('img');
-    userMarker.src = '/images/user-location.png';
-    userMarker.className = 'user-marker';
-    userMarker.style.position = 'absolute';
-    userMarker.style.left = `${x}px`;
-    userMarker.style.top = `${y}px`;
-    userMarker.style.width = '32px';
-    userMarker.style.height = '32px';
-    userMarker.style.transform = 'translate(-50%, -50%)';
-    userMarker.style.zIndex = '200';
+    init() {
+        
+        this.map = L.map('map').setView([-8.0476, -34.8770], 13);
+        
+        
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors',
+            maxZoom: 19
+        }).addTo(this.map);
+        
+        
+        this.map.on('click', (e) => {
+            this.handleMapClick(e.latlng.lat, e.latlng.lng);
+        });
+        
+        
+        this.getCurrentLocation();
+        
+        
+        this.setupFilters();
+        
+        
+        this.setupSearch();
+        
+        
+        this.showNoResults();
+    }
     
-    mapContainer.appendChild(userMarker);
-    currentPosition = { x, y };
+    getCurrentLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+                    
+                    
+                    this.map.setView([lat, lng], 15);
+                    
+                    
+                    const userIcon = L.divIcon({
+                        html: '<i class="fas fa-map-marker-alt" style="color: #00BFA5; font-size: 24px;"></i>',
+                        className: 'custom-div-icon',
+                        iconSize: [24, 24],
+                        iconAnchor: [12, 24]
+                    });
+                    
+                    L.marker([lat, lng], { icon: userIcon })
+                        .addTo(this.map)
+                        .bindPopup('Sua localização atual')
+                        .openPopup();
+                },
+                (error) => {
+                    console.log('Erro ao obter localização:', error);
+                   
+                }
+            );
+        }
+    }
+    
+    handleMapClick(lat, lng) {
+        
+        if (this.currentMarker) {
+            this.map.removeLayer(this.currentMarker);
+        }
+        
+        
+        const searchIcon = L.divIcon({
+            html: '<i class="fas fa-search" style="color: #FF6B35; font-size: 20px;"></i>',
+            className: 'custom-div-icon',
+            iconSize: [20, 20],
+            iconAnchor: [10, 20]
+        });
+        
+        this.currentMarker = L.marker([lat, lng], { icon: searchIcon })
+            .addTo(this.map)
+            .bindPopup('Buscando estabelecimentos próximos...')
+            .openPopup();
+        
+        
+        this.searchNearbyEstablishments(lat, lng);
+        
+        
+        document.querySelector('.nearby-stores').style.display = 'block';
+    }
+    
+    async searchNearbyEstablishments(lat, lng) {
+        const loading = document.getElementById('loading');
+        const storesList = document.getElementById('stores-list');
+        const noResults = document.getElementById('no-results');
+        
+        
+        loading.style.display = 'block';
+        storesList.innerHTML = '';
+        noResults.style.display = 'none';
+        
+        
+        this.clearEstablishmentMarkers();
+        
+        try {
+            const radius = document.getElementById('radius').value;
+            const query = this.buildOverpassQuery(lat, lng, radius);
+            
+            const response = await fetch('https://overpass-api.de/api/interpreter', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain'
+                },
+                body: query
+            });
+            
+            if (!response.ok) {
+                throw new Error('Erro na consulta à API');
+            }
+            
+            const data = await response.json();
+            
+            
+            this.processResults(data.elements, lat, lng);
+            
+        } catch (error) {
+            console.error('Erro na busca:', error);
+            storesList.innerHTML = '<p style="color: #FF6B35; text-align: center;">Erro ao buscar estabelecimentos. Tente novamente.</p>';
+        }
+        
+        loading.style.display = 'none';
+    }
+    
+    buildOverpassQuery(lat, lng, radius) {
+        const restaurants = document.getElementById('restaurants').checked;
+        const shops = document.getElementById('shops').checked;
+        const tourism = document.getElementById('tourism').checked;
+        
+        let queries = [];
+        
+        if (restaurants) {
+            queries.push(`node["amenity"~"restaurant|fast_food|cafe|bar|pub"](around:${radius},${lat},${lng});`);
+        }
+        
+        if (shops) {
+            queries.push(`node["shop"~"supermarket|convenience|mall|department_store|clothes|electronics"](around:${radius},${lat},${lng});`);
+        }
+        
+        if (tourism) {
+            queries.push(`node["tourism"~"hotel|attraction|museum"](around:${radius},${lat},${lng});`);
+        }
+        
+        return `
+            [out:json][timeout:25];
+            (
+                ${queries.join('\n')}
+            );
+            out center meta;
+        `;
+    }
+    
+    processResults(elements, centerLat, centerLng) {
+        const storesList = document.getElementById('stores-list');
+        const noResults = document.getElementById('no-results');
+        
+        if (elements.length === 0) {
+            noResults.style.display = 'block';
+            this.currentMarker.bindPopup('Nenhum estabelecimento encontrado próximo');
+            return;
+        }
+        
+        
+        const establishments = elements
+            .filter(el => el.tags && el.tags.name)
+            .map(el => {
+                const distance = this.calculateDistance(centerLat, centerLng, el.lat, el.lon);
+                return { ...el, distance };
+            })
+            .sort((a, b) => a.distance - b.distance)
+            .slice(0, 20); 
+        
+        
+        this.displayResults(establishments);
+        
+        
+        this.addEstablishmentMarkers(establishments);
+        
+       
+        this.currentMarker.bindPopup(`Encontrados ${establishments.length} estabelecimentos próximos`);
+    }
+    
+    displayResults(establishments) {
+        const storesList = document.getElementById('stores-list');
+        let html = '';
+        
+        establishments.forEach(est => {
+            const type = this.getEstablishmentType(est.tags);
+            const icon = this.getEstablishmentIcon(est.tags);
+            
+            html += `
+                <div class="store-card" onclick="lojasMap.focusOnEstablishment(${est.lat}, ${est.lon})">
+                    <div class="store-icon">${icon}</div>
+                    <div class="store-name">${est.tags.name}</div>
+                    <div class="store-type">${type}</div>
+                    <div class="store-distance">${est.distance}m de distância</div>
+                </div>
+            `;
+        });
+        
+        storesList.innerHTML = html;
+    }
+    
+    addEstablishmentMarkers(establishments) {
+        establishments.forEach(est => {
+            const icon = this.getEstablishmentIcon(est.tags);
+            const type = this.getEstablishmentType(est.tags);
+            
+            const markerIcon = L.divIcon({
+                html: `<div style="background: white; border-radius: 50%; padding: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.3);">${icon}</div>`,
+                className: 'custom-establishment-marker',
+                iconSize: [30, 30],
+                iconAnchor: [15, 15]
+            });
+            
+            const marker = L.marker([est.lat, est.lon], { icon: markerIcon })
+                .addTo(this.map)
+                .bindPopup(`
+                    <div style="text-align: center; min-width: 150px;">
+                        <div style="font-size: 20px; margin-bottom: 5px;">${icon}</div>
+                        <strong>${est.tags.name}</strong><br>
+                        <em>${type}</em><br>
+                        <small style="color: #00BFA5;">Distância: ${est.distance}m</small>
+                    </div>
+                `);
+            
+            this.establishmentMarkers.push(marker);
+        });
+    }
+    
+    getEstablishmentType(tags) {
+        if (tags.amenity) {
+            const types = {
+                restaurant: 'Restaurante',
+                fast_food: 'Fast Food',
+                cafe: 'Café',
+                bar: 'Bar',
+                pub: 'Pub'
+            };
+            return types[tags.amenity] || 'Alimentação';
+        }
+        
+        if (tags.shop) {
+            const types = {
+                supermarket: 'Supermercado',
+                convenience: 'Conveniência',
+                mall: 'Shopping',
+                department_store: 'Loja de Departamento',
+                clothes: 'Roupas',
+                electronics: 'Eletrônicos'
+            };
+            return types[tags.shop] || 'Loja';
+        }
+        
+        if (tags.tourism) {
+            const types = {
+                hotel: 'Hotel',
+                attraction: 'Atração',
+                museum: 'Museu'
+            };
+            return types[tags.tourism] || 'Turismo';
+        }
+        
+        return 'Estabelecimento';
+    }
+    
+    getEstablishmentIcon(tags) {
+        if (tags.amenity && ['restaurant', 'fast_food', 'cafe'].includes(tags.amenity)) return '🍽️';
+        if (tags.amenity && ['bar', 'pub'].includes(tags.amenity)) return '🍺';
+        if (tags.shop === 'supermarket') return '🏪';
+        if (tags.shop === 'mall') return '🏬';
+        if (tags.shop === 'clothes') return '👕';
+        if (tags.shop === 'electronics') return '📱';
+        if (tags.shop) return '🛍️';
+        if (tags.tourism === 'hotel') return '🏨';
+        if (tags.tourism === 'museum') return '🏛️';
+        if (tags.tourism) return '🎯';
+        return '📍';
+    }
+    
+    calculateDistance(lat1, lng1, lat2, lng2) {
+        const R = 6371e3;
+        const φ1 = lat1 * Math.PI/180;
+        const φ2 = lat2 * Math.PI/180;
+        const Δφ = (lat2-lat1) * Math.PI/180;
+        const Δλ = (lng2-lng1) * Math.PI/180;
+        
+        const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+                  Math.cos(φ1) * Math.cos(φ2) *
+                  Math.sin(Δλ/2) * Math.sin(Δλ/2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        
+        return Math.round(R * c);
+    }
+    
+    clearEstablishmentMarkers() {
+        this.establishmentMarkers.forEach(marker => {
+            this.map.removeLayer(marker);
+        });
+        this.establishmentMarkers = [];
+    }
+    
+    focusOnEstablishment(lat, lng) {
+        this.map.setView([lat, lng], 17);
+        
+        
+        this.establishmentMarkers.forEach(marker => {
+            const markerPos = marker.getLatLng();
+            if (Math.abs(markerPos.lat - lat) < 0.0001 && Math.abs(markerPos.lng - lng) < 0.0001) {
+                marker.openPopup();
+            }
+        });
+    }
+    
+    setupFilters() {
+        const radius = document.getElementById('radius');
+        const checkboxes = ['restaurants', 'shops', 'tourism'];
+        
+        radius.addEventListener('change', () => {
+            if (this.currentMarker) {
+                const latlng = this.currentMarker.getLatLng();
+                this.searchNearbyEstablishments(latlng.lat, latlng.lng);
+            }
+        });
+        
+        checkboxes.forEach(id => {
+            document.getElementById(id).addEventListener('change', () => {
+                if (this.currentMarker) {
+                    const latlng = this.currentMarker.getLatLng();
+                    this.searchNearbyEstablishments(latlng.lat, latlng.lng);
+                }
+            });
+        });
+    }
+    
+    setupSearch() {
+        const searchInput = document.getElementById('search-input');
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                this.performSearch(searchInput.value);
+            }
+        });
+    }
+    
+    async performSearch(query) {
+        if (!query.trim()) return;
+        
+        try {
+            
+            const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=1&bounded=1&viewbox=-35.0,-7.8,-34.7,-8.2`);
+            const results = await response.json();
+            
+            if (results.length > 0) {
+                const result = results[0];
+                const lat = parseFloat(result.lat);
+                const lng = parseFloat(result.lon);
+                
+                this.map.setView([lat, lng], 16);
+                this.handleMapClick(lat, lng);
+            } else {
+                alert('Local não encontrado. Tente buscar por um nome mais específico.');
+            }
+        } catch (error) {
+            console.error('Erro na busca:', error);
+            alert('Erro ao realizar busca. Tente novamente.');
+        }
+    }
+    
+    showNoResults() {
+        document.getElementById('no-results').style.display = 'block';
+    }
 }
 
-// Show nearby stores in the side panel
-function showNearbyStores() {
-    const storesList = document.getElementById("stores-list");
-    storesList.innerHTML = '';
-    
-    storeMarkers.forEach(store => {
-        createStoreCard(store);
-    });
-    
-    // Make the nearby stores section visible
-    document.querySelector('.nearby-stores').style.display = 'block';
-}
 
-// Create a store card
-function createStoreCard(store) {
-    const storesList = document.getElementById("stores-list");
-    const card = document.createElement("div");
-    card.className = "store-card";
-    
-    card.innerHTML = `
-        <img src="${store.image}" alt="${store.name}" class="store-logo">
-        <div class="store-rating">${store.rating.toFixed(1)} <span class="star">★</span></div>
-        <div class="store-name">${store.name}</div>
-    `;
-    
-    storesList.appendChild(card);
-}
-
-// Initialize the map when the page loads
-document.addEventListener('DOMContentLoaded', initMap);
+let lojasMap;
+document.addEventListener('DOMContentLoaded', function() {
+    lojasMap = new LojasMap();
+});

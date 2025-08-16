@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 use App\Models\User;
 
 class ProfileController extends Controller
@@ -14,10 +15,10 @@ class ProfileController extends Controller
         return view('perfil', ['user' => Auth::user()]);
     }
 
-    public function update(Request $request)
+            public function update(Request $request)
     {
         $user = Auth::user();
-    
+
         $request->validate([
             'name' => 'required|string|max:255',
             'birth_date' => 'nullable|string|max:10',
@@ -26,33 +27,33 @@ class ProfileController extends Controller
             'about' => 'nullable|string|max:1000',
             'profile_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
-    
+
         $user->name = $request->name;
         $user->birth_date = $request->birth_date;
         $user->contact_email = $request->contact_email;
         $user->phone = $request->phone;
         $user->about = $request->about;
-    
+
         if ($request->hasFile('profile_image')) {
-            // Deletar imagem anterior se existir
-            if ($user->profile_image) {
-                $oldImagePath = str_replace('/storage/', '', $user->profile_image);
-                Storage::disk('public')->delete($oldImagePath);
+            
+            if ($user->profile_image && Storage::disk('public')->exists($user->profile_image)) {
+                Storage::disk('public')->delete($user->profile_image);
             }
             
-            // Salvar nova imagem
-            $path = $request->file('profile_image')->store('profile_images', 'public');
             
-            // Atualizar caminho no banco de dados
+            $imageName = time() . '.' . $request->file('profile_image')->getClientOriginalExtension();
+            $path = $request->file('profile_image')->storeAs('profile_images', $imageName, 'public');
             $user->profile_image = $path;
+            
+            Log::info('Imagem salva em: ' . $path);
         }
-    
+
         $user->save();
-    
+
         return redirect()->route('perfil')->with('success', 'Perfil atualizado com sucesso!');
     }
     
-    // Método para atualizar o papel do usuário para gerente
+    
     public function upgradeRole(Request $request)
     {
         $user = Auth::user();

@@ -48,7 +48,7 @@
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    position: relative; /* Important for positioning the image */
+    cursor: crosshair; /* Indica que é clicável */
 }
 
 .nearby-stores {
@@ -196,4 +196,136 @@ body {
 
 #map::-webkit-scrollbar-thumb:hover {
     background: #555;
+}
+
+/* ADICIONE ESTES ESTILOS AO SEU ARQUIVO public/css/maps/style.css EXISTENTE */
+
+/* Ajustes para o Leaflet */
+
+/* Estilos para loading */
+.loading-indicator {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+.loading-indicator i {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #00BFA5;
+}
+
+/* Estilos para quando não há resultados */
+.no-results {
+    text-align: center;
+    padding: 20px;
+    color: #999;
+    font-style: italic;
+}
+
+/* Container de filtros */
+.filters-container {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f8f8f8;
+    border-radius: 15px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.filter-group label {
+    font-weight: bold;
+    color: #333;
+    font-size: 14px;
+}
+
+.filter-group select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: white;
+}
+
+.filter-checkboxes {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.filter-checkboxes label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.filter-checkboxes input[type="checkbox"] {
+    margin: 0;
+}
+
+/* Ajustar store-card para os novos dados */
+.store-card {
+    background: #f8f8f8;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.store-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.store-name {
+    font-weight: bold;
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.store-type {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.store-distance {
+    color: #00BFA5;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.store-icon {
+    font-size: 24px;
+    margin-bottom: 10px;
+    display: block;
+    text-align: center;
+}
+
+/* Responsividade para filtros */
+@media (max-width: 768px) {
+    .filters-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filter-group {
+        width: 100%;
+    }
+    
+    .filter-checkboxes {
+        justify-content: space-between;
+    }
 }

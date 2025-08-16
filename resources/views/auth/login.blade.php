@@ -68,7 +68,7 @@
 <body>
     <div class="login-container">
         <img src="/images/Qualityplus.png" alt="QualityPlus+ Logo">
-        <!--<h1>Login</h1>-->
+        
         <form method="POST" action="{{ route('login') }}">
             @csrf
             <input type="email" id="email" name="email" placeholder="Email" required>

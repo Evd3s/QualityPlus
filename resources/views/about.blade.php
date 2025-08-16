@@ -3,12 +3,12 @@
 @section('content')
 <div class="container">
     <header class="header-custom">
-        <!-- Logo -->
+        
         <div class="logo">
             <span class="green">Quality</span><span class="blue">Plus+</span>
         </div>
 
-        <!-- Navegação -->
+        
         <nav class="nav-custom">
             <ul class="d-flex list-unstyled m-0">
                 <li><a href="{{ route('about') }}" class="text-dark mx-3">Sobre</a></li>
@@ -16,7 +16,7 @@
             </ul>
         </nav>
 
-        <!-- Perfil e Logout -->
+        
         <div class="profile-logout d-flex align-items-center">
             <div class="profile-icon">
                 <img src="{{ asset('images/perfil.png') }}" alt="Perfil" class="rounded-circle" width="40" height="40">

@@ -118,7 +118,7 @@
     </div>
 </div>
 
-<!-- Modal de Upgrade para Gerente -->
+
 <div id="upgrade-modal" class="modal hidden">
     <div class="modal-content">
         <div class="modal-header">
@@ -134,7 +134,7 @@
     </div>
 </div>
 
-<!-- Modal de Perguntas da Empresa -->
+
 <div id="company-questions-modal" class="modal hidden">
     <div class="modal-content large">
         <div class="modal-header">
@@ -146,25 +146,25 @@
         </div>
         
         <form id="company-form">
-            <!-- Pergunta 1: CNPJ -->
+        
             <div class="question-step active" data-step="1">
                 <label>CNPJ da Empresa</label>
                 <input type="text" name="cnpj" id="cnpj-input" placeholder="00.000.000/0000-00" maxlength="18" required>
             </div>
 
-            <!-- Pergunta 2: Nome da Empresa -->
+            
             <div class="question-step hidden" data-step="2">
                 <label>Nome da Empresa</label>
                 <input type="text" name="company_name" placeholder="Digite o nome da sua empresa" required>
             </div>
 
-            <!-- Pergunta 3: Ano de Criação -->
+            
             <div class="question-step hidden" data-step="3">
                 <label>Ano que foi criada</label>
                 <input type="number" name="foundation_year" placeholder="2020" min="1900" max="2025" required>
             </div>
 
-            <!-- Pergunta 4: Tipo da Empresa -->
+            
             <div class="question-step hidden" data-step="4">
                 <label>Tipo da Empresa</label>
                 <select name="company_type" required>
@@ -178,14 +178,14 @@
                 </select>
             </div>
 
-            <!-- Pergunta 5: Localização -->
+            
             <div class="question-step hidden" data-step="5">
                 <label>Localização</label>
                 <input type="text" name="cep" placeholder="CEP: 00000-000" maxlength="9" required>
                 <textarea name="address_details" placeholder="Informações extras sobre a localização" rows="3"></textarea>
             </div>
 
-            <!-- Pergunta 6: Google Maps -->
+            
             <div class="question-step hidden" data-step="6">
                 <label>Link do Google Maps (opcional)</label>
                 <input type="url" name="google_maps_link" placeholder="https://maps.app.goo.gl/abcde12345">
@@ -202,7 +202,7 @@
     </div>
 </div>
 
-<!-- Modal de Processamento -->
+
 <div id="processing-modal" class="modal hidden">
     <div class="modal-content">
         <div class="modal-body text-center">
@@ -273,7 +273,7 @@ document.addEventListener('DOMContentLoaded', function() {
         location.reload();
     });
 
-    // Sistema de formatação da data de nascimento
+    
     birthDateInput?.addEventListener('input', function(e) {
         let value = this.value.replace(/\D/g, '');
         
@@ -290,7 +290,7 @@ document.addEventListener('DOMContentLoaded', function() {
         this.value = value;
     });
 
-    // Sistema inteligente de DDD e telefone
+    
     let previousValue = '';
     phoneInput?.addEventListener('input', function(e) {
         let value = this.value.replace(/\D/g, '');
@@ -326,7 +326,7 @@ document.addEventListener('DOMContentLoaded', function() {
         previousValue = this.value;
     });
 
-    // Preview da imagem
+    
     const imageInput = document.querySelector('input[name="profile_image"]');
     const profileImage = document.getElementById('profile-image');
     const headerProfileImage = document.getElementById('header-profile-image');
@@ -342,7 +342,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Formatação do CNPJ
+    
     const cnpjInput = document.getElementById('cnpj-input');
     cnpjInput?.addEventListener('input', function(e) {
         let value = this.value.replace(/\D/g, '');
@@ -450,7 +450,7 @@ function finishUpgrade() {
     closeCompanyModal();
     document.getElementById('processing-modal').classList.remove('hidden');
     
-    // Simular processamento
+    
     setTimeout(() => {
         fetch('{{ route("perfil.upgrade-role") }}', {
             method: 'POST',

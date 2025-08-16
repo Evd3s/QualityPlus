@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ProdutoController extends Controller
 {
-    // Armazena um novo produto
+    
     public function store(Request $request)
     {
         $request->validate([
@@ -36,14 +36,14 @@ class ProdutoController extends Controller
         return redirect()->back()->with('success', 'Produto cadastrado com sucesso!');
     }
 
-    // Exibe detalhes de um produto
+    
     public function show($id)
     {
         $produto = Produto::findOrFail($id);
         return view('produto.show', compact('produto'));
     }
 
-    // Lista produtos por categoria (exibido em uma página separada)
+    
     public function porCategoria($categoria)
     {
         $produtos = Produto::where('categoria', $categoria)->get();
@@ -51,14 +51,14 @@ class ProdutoController extends Controller
         return view('produto.por_categoria', compact('produtos', 'categoria'));
     }
 
-    // Mostra o formulário para editar um produto (se for página separada)
+    
     public function edit($id)
     {
         $produto = Produto::findOrFail($id);
         return view('produto.edit', compact('produto'));
     }
 
-    // Atualiza o produto no banco
+    
     public function update(Request $request, $id)
     {
         $produto = Produto::findOrFail($id);
@@ -79,7 +79,7 @@ class ProdutoController extends Controller
         $produto->descricao = $request->descricao;
 
         if ($request->hasFile('imagem')) {
-            // Deleta imagem antiga se existir
+            
             if ($produto->imagem && Storage::disk('public')->exists($produto->imagem)) {
                 Storage::disk('public')->delete($produto->imagem);
             }
@@ -92,12 +92,12 @@ class ProdutoController extends Controller
         return redirect()->route('empresa.sobre', $produto->empresa_id)->with('success', 'Produto atualizado com sucesso!');
     }
 
-    // Exclui um produto
+    
     public function destroy($id)
     {
         $produto = Produto::findOrFail($id);
 
-        // Deleta imagem do storage
+        
         if ($produto->imagem && Storage::disk('public')->exists($produto->imagem)) {
             Storage::disk('public')->delete($produto->imagem);
         }

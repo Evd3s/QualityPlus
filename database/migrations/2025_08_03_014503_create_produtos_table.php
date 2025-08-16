@@ -14,7 +14,7 @@ class CreateProdutosTable extends Migration
             $table->string('nome');
             $table->decimal('preco', 10, 2)->nullable();
             $table->integer('quantidade')->default(0);
-            $table->string('categoria'); // nova coluna categoria
+            $table->string('categoria'); 
             $table->text('descricao');
             $table->string('imagem');
             $table->timestamps();

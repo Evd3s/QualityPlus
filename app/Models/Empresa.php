@@ -11,7 +11,7 @@ class Empresa extends Model
 
     protected $fillable = ['nome', 'cnpj', 'imagem', 'sobre'];
 
-    // Relacionamento 1:N com Produto
+    
     public function produtos()
     {
         return $this->hasMany(Produto::class);

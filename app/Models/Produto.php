@@ -14,12 +14,12 @@ class Produto extends Model
         'nome',
         'preco',
         'quantidade',
-        'categoria',   // <-- novo campo
+        'categoria',   
         'descricao',
         'imagem',
     ];
 
-    // Relação com Empresa
+    
     public function empresa()
     {
         return $this->belongsTo(Empresa::class);

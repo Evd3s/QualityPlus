@@ -8,10 +8,10 @@ document.addEventListener("DOMContentLoaded", function() {
             const rating = this.getAttribute('data-value');
             const itemId = this.closest('.rating').getAttribute('data-item-id');
             
-            // Atualiza as estrelas visíveis
+            
             updateStars(rating, itemId);
 
-            // Enviar via AJAX
+            
             fetch('/avaliar-item', {
                 method: 'POST',
                 headers: {
@@ -32,12 +32,12 @@ document.addEventListener("DOMContentLoaded", function() {
     function updateStars(rating, itemId) {
         const stars = document.querySelectorAll(`.rating[data-item-id="${itemId}"] .star`);
         
-        // Limpa as estrelas
+        
         stars.forEach(star => {
             star.classList.remove('filled');
         });
         
-        // Preenche as estrelas até o valor de 'rating'
+        
         for (let i = 0; i < rating; i++) {
             stars[i].classList.add('filled');
         }

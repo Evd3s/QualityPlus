@@ -20,9 +20,9 @@
 
     .header-logo img {
         height: 50px;
-        width: auto; /* mantém proporção */
+        width: auto; 
         cursor: pointer;
-        border-radius: 0; /* sem arredondar */
+        border-radius: 0; 
         transition: transform 0.3s ease;
     }
 
@@ -30,7 +30,7 @@
         height: 50px;
         width: 50px;
         cursor: pointer;
-        border-radius: 50%; /* perfil redondo */
+        border-radius: 50%; 
         object-fit: cover;
         transition: transform 0.3s ease;
     }
@@ -40,14 +40,14 @@
         transform: scale(1.05);
     }
 
-    /* Grid dos cards */
+    
     .produtos-grid {
         display: flex;
         flex-wrap: nowrap;
         overflow-x: auto;
         gap: 24px;
         padding-bottom: 10px;
-        /* opcional para suavizar scroll */
+        
         scroll-behavior: smooth;
     }
 
@@ -64,7 +64,7 @@
     }
 
     .card-produto {
-        flex: 0 0 260px; /* tamanho fixo */
+        flex: 0 0 260px; 
         background: white;
         border-radius: 15px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -73,7 +73,7 @@
         display: flex;
         flex-direction: column;
         transition: transform 0.3s ease;
-        scroll-snap-align: start; /* para snap no scroll */
+        scroll-snap-align: start; 
     }
 
     .card-produto:hover {
@@ -134,7 +134,7 @@
 
 <section class="container">
 
-    <!-- Header com logo principal e logo do perfil -->
+    
     <div class="header-top">
         <div class="header-logo">
             <a href="{{ route('dashboard') }}">

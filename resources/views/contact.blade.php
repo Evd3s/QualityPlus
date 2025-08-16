@@ -16,7 +16,6 @@
     <section class="content">
         <h1>Entre em contato conosco</h1>
         <p>Se você tem alguma dúvida ou gostaria de saber mais sobre como podemos ajudar a sua empresa, entre em contato conosco!</p>
-        <!-- Adicionar formulário ou detalhes de contato -->
     </section>
 </div>
 @endsection

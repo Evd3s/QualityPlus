@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Executa as migrations.
-     */
+    
     public function up(): void
     {
         Schema::create('empresas', function (Blueprint $table) {
@@ -17,14 +15,12 @@ return new class extends Migration
             $table->string('cnpj');
             $table->text('sobre');
             $table->string('imagem');
-            $table->boolean('status')->default(true); // A empresa vai aparecer no dashboard
+            $table->boolean('status')->default(true); 
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverte as migrations.
-     */
+    
     public function down(): void
     {
         Schema::dropIfExists('empresas');
