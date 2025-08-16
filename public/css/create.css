@@ -1,0 +1,159 @@
+/* ======== Cabeçalho ======== */
+.header-custom {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.profile-logo {
+    height: 45px;
+    cursor: pointer;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.profile-logo:hover {
+    opacity: 0.8;
+}
+
+.header-profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.header-profile-image:hover {
+    transform: scale(1.05);
+}
+
+/* ======== Container Principal ======== */
+.dashboard-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ======== Layout Principal ======== */
+.empresa-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+/* ======== Preview da Empresa ======== */
+.empresa-preview {
+    background: #fff;
+    border-radius: 12px;
+    /* sombra removida para o preview */
+    flex: 1;
+    min-width: 280px;
+    padding: 25px 15px;
+    text-align: left;
+}
+
+/* Logo da empresa - tamanho fixo e responsivo */
+.empresa-preview img {
+    width: 240px;
+    height: 240px;
+    border-radius: 12px;
+    object-fit: contain; /* mantém proporção sem cortar */
+    display: block;
+    margin-bottom: 20px;
+    background-color: transparent; /* sem fundo */
+    box-shadow: none; /* sem sombra */
+    border: none; /* sem borda */
+    opacity: 1;
+    transition: opacity 0.4s ease-in-out;
+}
+
+/* Nome alinhado à esquerda, maior e com espaçamento */
+.empresa-preview h2 {
+    font-size: 24px;
+    color: #222;
+    margin-bottom: 12px;
+    text-align: left;
+}
+
+/* Sobre alinhado à esquerda, maior e com espaçamento */
+.empresa-preview p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.5;
+    text-align: left;
+    white-space: pre-line; /* respeita quebras de linha */
+}
+
+/* ======== Formulário ======== */
+.empresa-form {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+    flex: 1;
+    min-width: 320px;
+    padding: 25px;
+}
+
+.empresa-form h4 {
+    color: #006BE6;
+    margin-bottom: 15px;
+}
+
+.empresa-form .form-label {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.empresa-form input,
+.empresa-form textarea,
+.empresa-form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.2s ease-in-out;
+}
+
+.empresa-form input:focus,
+.empresa-form textarea:focus,
+.empresa-form select:focus {
+    border-color: #006BE6;
+    outline: none;
+}
+
+/* Caixa de texto fixa, sem redimensionar */
+.empresa-form textarea {
+    resize: none;
+    min-height: 120px;
+}
+
+/* Botão */
+.empresa-form button {
+    background: linear-gradient(to right, #00B88A, #009874);
+    color: #fff;
+    font-weight: 600;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    width: 100%;
+    margin-top: 10px;
+    transition: background 0.3s ease-in-out, transform 0.1s ease-in-out;
+}
+
+.empresa-form button:hover {
+    background: linear-gradient(to right, #009874, #00B88A);
+    transform: scale(1.01);
+}
+
+/* ======== Responsividade ======== */
+@media (max-width: 768px) {
+    .empresa-wrapper {
+        flex-direction: column;
+    }
+
+    .empresa-preview img {
+        width: 180px;
+        height: 180px;
+    }
+}

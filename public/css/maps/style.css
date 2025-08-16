@@ -1,0 +1,199 @@
+.map-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.map-search-container {
+    padding: 10px 0;
+}
+
+.search-box {
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px 20px 12px 45px;
+    border-radius: 25px;
+    border: 1px solid #e0e0e0;
+    background: #f8f8f8;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.map-content {
+    display: flex;
+    margin-top: 20px;
+    min-height: 500px;
+}
+
+#map {
+    flex: 2;
+    height: 500px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative; /* Important for positioning the image */
+}
+
+.nearby-stores {
+    flex: 1;
+    margin-left: 20px;
+    padding: 10px;
+    display: none;  /* Initially hidden until user clicks on map */
+}
+
+.nearby-stores h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.store-card {
+    background: #f8f8f8;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.store-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.store-logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.store-rating {
+    display: inline-block;
+    background: #333;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 15px;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.store-rating .star {
+    color: gold;
+    margin-left: 5px;
+}
+
+.store-name {
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    font-size: 16px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .map-content {
+        flex-direction: column;
+    }
+
+    #map {
+        height: 300px;
+    }
+
+    .nearby-stores {
+        margin-left: 0;
+        margin-top: 20px;
+    }
+}
+
+/* Garantir que o cabeçalho tenha o perfil no canto direito */
+.header-profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Estilo para o gradiente de fundo da página */
+body {
+    background: linear-gradient(to bottom, #00BFA5, #0288D1);
+    min-height: 100vh;
+    padding-bottom: 30px;
+}
+
+.header-profile-image {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.profile-logo {
+    cursor: pointer;
+    transition: opacity 0.2s ease-in-out;
+    height: 40px; /* Ajuste conforme o tamanho da logo */
+}
+
+.profile-logo:hover {
+    opacity: 0.8;
+}
+
+#map img {
+    user-select: none;
+    -webkit-user-drag: none;
+    max-width: none; /* This prevents auto-resizing */
+    max-height: none; /* This prevents auto-resizing */
+}
+
+.user-marker {
+    cursor: pointer;
+    pointer-events: none; /* This prevents the marker from interfering with map dragging */
+}
+
+.nearby-stores {
+    display: none; /* Initially hidden until user clicks on map */
+}
+
+/* Add scrollbar styling */
+#map::-webkit-scrollbar {
+    display: none;
+}
+
+#map::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+#map::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+#map::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

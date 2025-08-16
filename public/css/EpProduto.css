@@ -1,0 +1,126 @@
+/* Header */
+.header-custom {
+    background-color: #ffffff;
+    padding: 15px 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo a img {
+    height: 40px;
+}
+
+.header-profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Produto Section */
+.produto-section {
+    padding: 60px 20px 40px;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+}
+
+.produto-container {
+    max-width: 700px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 30px 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.produto-titulo {
+    font-size: 32px;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+}
+
+.produto-imagem-wrapper {
+    text-align: center;
+}
+
+.produto-imagem {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.produto-preco {
+    color: #00B88A;
+    font-weight: 700;
+    font-size: 24px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Nova classe para quantidade */
+.produto-quantidade {
+    color: #1e7e34;
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 6px;
+}
+
+.produto-descricao {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    white-space: pre-line;
+    text-align: justify;
+}
+
+.produto-botao-voltar-wrapper {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.produto-botao-voltar {
+    background: linear-gradient(to right, #006BE6, #008CFF);
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.produto-botao-voltar:hover {
+    background: linear-gradient(to right, #008CFF, #006BE6);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .produto-container {
+        padding: 20px 15px;
+    }
+
+    .produto-titulo {
+        font-size: 26px;
+    }
+
+    .produto-preco {
+        font-size: 20px;
+    }
+    
+    .produto-quantidade {
+        font-size: 16px;
+    }
+}

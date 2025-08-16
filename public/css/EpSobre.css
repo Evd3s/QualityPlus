@@ -1,0 +1,224 @@
+/* Container principal da seção sobre */
+.sobre-content .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Títulos principais */
+h1.text-center.mb-4 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+}
+
+/* Título secundário da empresa */
+h2.mt-3.text-center {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem; /* maior espaçamento */
+    color: #34495e;
+}
+
+/* Título da seção de detalhes da empresa */
+.empresa-detalhes h4 {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #555;
+    margin: 0;
+}
+
+/* Caixa da descrição da empresa */
+.sobre-empresa {
+    background-color: #f9f9f9;
+    padding: 30px 35px; /* mais espaçamento interno */
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    margin-top: 2rem; /* maior distância do título */
+}
+
+.sobre-empresa h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    color: #2c3e50;
+}
+
+.sobre-empresa p {
+    white-space: pre-line;
+    line-height: 1.8; /* um pouco mais espaçado */
+    font-size: 1rem;
+    color: #444;
+    margin-top: 0;
+}
+
+/* Botões editar e cadastrar - container */
+.text-center.mt-4 {
+    display: flex;
+    justify-content: center;
+    gap: 24px; /* mais espaçamento entre botões */
+    margin-top: 2.5rem;
+}
+
+/* Botões estilizados */
+.btn-editar {
+    background-color: #ffc107;
+    color: #212529;
+    font-weight: 600;
+    border: none;
+    padding: 12px 26px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+    box-shadow: 0 5px 12px rgba(255, 193, 7, 0.4);
+    font-size: 1rem;
+}
+
+.btn-editar:hover {
+    background-color: #e0a800;
+}
+
+/* Cards de produtos */
+.card-produto {
+    width: 230px; /* menor para caber 4 por linha */
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    overflow: hidden;
+    padding: 18px;
+    transition: box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-produto:hover {
+    box-shadow: 0 10px 28px rgba(0,0,0,0.15);
+}
+
+/* Imagem do card */
+.card-produto-img {
+    width: 100%;
+    height: 140px; /* levemente menor */
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 14px;
+}
+
+/* Título do produto */
+.card-produto-titulo {
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+/* Preço */
+.card-produto-preco {
+    color: #1e7e34;
+    font-weight: 700;
+    margin: 6px 0;
+    text-align: center;
+}
+
+/* Quantidade e categoria */
+.card-produto-quantidade,
+.card-produto-categoria {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+/* Descrição curta */
+.card-produto-desc {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 12px;
+    text-align: center;
+    flex-grow: 1;
+}
+
+/* Botões dentro do card */
+/* Container flex para os botões, centralizado, com espaçamento consistente */
+.card-produto .d-flex.justify-content-center.gap-2 {
+    display: flex !important;
+    justify-content: center;
+    gap: 14px; /* Mantém o gap para espaçamento entre botões */
+    margin-top: auto;
+    flex-wrap: wrap; /* Permite quebra de linha se necessário */
+}
+
+/* Base dos botões */
+.btn-custom {
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+    border: none;
+    user-select: none;
+    min-width: 70px;
+    text-align: center;
+    font-size: 0.9rem;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+
+    /* Remove margin-right para evitar duplicidade com gap no container */
+    margin-right: 0;
+}
+
+/* Cores dos botões mantidas */
+.btn-custom[style*="background-color: #3490dc"] {
+    background-color: #3490dc;
+    color: white;
+}
+
+.btn-custom[style*="background-color: #ffc107"] {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.btn-custom[style*="background-color: #dc3545"] {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Corrige espaçamento entre botões, incluindo botão dentro do form */
+.card-produto .d-flex.justify-content-center.gap-2 > form {
+    margin: 0;
+    display: inline-block;
+}
+
+/* Container dos cards - 4 por linha */
+.d-flex.flex-wrap.justify-content-center.gap-4 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px; /* espaçamento horizontal e vertical */
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+/* Responsividade */
+@media (max-width: 992px) {
+    .card-produto {
+        width: 45%; /* 2 cards por linha em tablets */
+    }
+}
+
+@media (max-width: 600px) {
+    .card-produto {
+        width: 100%; /* 1 card por linha em celulares */
+        max-width: 320px;
+        margin: 0 auto;
+    }
+    .text-center.mt-4 {
+        flex-direction: column;
+        gap: 16px;
+    }
+}
